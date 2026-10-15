@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Result Predictor</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f3f6fb; color: #172033; }
+    main { max-width: 520px; margin: 48px auto; padding: 28px; background: white; border-radius: 16px; box-shadow: 0 8px 28px #14213d18; }
+    h1 { margin-top: 0; }
+    .version { color: #475569; margin-bottom: 24px; }
+    label { display: block; margin: 16px 0 6px; font-weight: 600; }
+    input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 16px; }
+    button { width: 100%; margin-top: 22px; padding: 12px; border: 0; border-radius: 8px; background: #2457d6; color: white; font-size: 16px; cursor: pointer; }
+    .result, .error { margin-top: 20px; padding: 14px; border-radius: 8px; }
+    .result { background: #e8f8ee; color: #166534; }
+    .error { background: #fff0f0; color: #b42318; }
+    .hint { color: #64748b; font-size: 13px; margin-top: 18px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Student Result Predictor</h1>
+    <p class="version">Model Version: <strong>{{ model_version }}</strong></p>
+    <form method="POST">
+      <label for="study_hours">Study Hours</label>
+      <input id="study_hours" type="number" name="study_hours" min="0" max="24" step="any" value="{{ study_hours }}" required>
+
+      <label for="attendance">Attendance Percentage</label>
+      <input id="attendance" type="number" name="attendance" min="0" max="100" step="any" value="{{ attendance }}" required>
+
+      <label for="internal_marks">Internal Marks (out of 100)</label>
+      <input id="internal_marks" type="number" name="internal_marks" min="0" max="100" step="any" value="{{ internal_marks }}" required>
+
+      <button type="submit">Predict Result</button>
+    </form>
+    {% if prediction %}
+      <div class="result"><strong>Predicted Result: {{ prediction }}</strong></div>
+    {% endif %}
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+    <p class="hint">This is a sample educational ML project; predictions are not official academic results.</p>
+  </main>
+</body>
+</html>
